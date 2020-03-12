@@ -49,8 +49,6 @@ class Jarvis:
         sleep(2)
 
         for i in range(10):
-            # self.actions.double_click(self.driver.find_element_by_xpath(
-            #     '/html/body/div[4]/div[2]/div/article/div[1]/div/div/div[1]/div[2]')).perform()
             self.driver.find_element_by_xpath(
                 '/html/body/div[4]/div[2]/div/article/div[2]/section[1]/span[1]/button').click()
             sleep(2)
@@ -75,4 +73,4 @@ class Jarvis:
 
 jarvis = Jarvis(user_name, user_password)
 jarvis.login()
-jarvis.explore(hashtags[0])
+jarvis.explore(hashtags[1])
