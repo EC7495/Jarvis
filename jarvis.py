@@ -39,23 +39,24 @@ class Jarvis:
         except:
             pass
 
-    def explore(self, tags, num_pics, comment):
+    def explore(self, tag):
 
-        self.driver.get(tags_url + tags[1])
+        self.driver.get(tags_url + tag)
         sleep(2)
 
         self.driver.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/article/div[1]/div/div/div[1]/div[1]/a/div/div[2]').click()
-        sleep(5)
+        sleep(2)
 
-        for i in range(num_pics):
-            sleep(1)
-            self.actions.double_click(self.driver.find_element_by_xpath(
-                '/html/body/div[4]/div[2]/div/article/div[1]/div/div/div[2]')).perform()
-            sleep(4)
+        for i in range(10):
+            # self.actions.double_click(self.driver.find_element_by_xpath(
+            #     '/html/body/div[4]/div[2]/div/article/div[1]/div/div/div[1]/div[2]')).perform()
+            self.driver.find_element_by_xpath(
+                '/html/body/div[4]/div[2]/div/article/div[2]/section[1]/span[1]/button').click()
+            sleep(2)
 
             self.driver.find_element_by_link_text('Next').click()
-            sleep(4)
+            sleep(2)
 
     def show_love(self):
         print('love')
@@ -74,4 +75,4 @@ class Jarvis:
 
 jarvis = Jarvis(user_name, user_password)
 jarvis.login()
-jarvis.explore(hashtags, 10, 'awesome!')
+jarvis.explore(hashtags[0])
