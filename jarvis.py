@@ -51,16 +51,19 @@ class Jarvis:
             sleep(2)
 
             for i in range(num_pics):
-                self.driver.find_elements_by_class_name('wpO6b')[0].click()
-                sleep(2)
+                try:
+                    self.driver.find_elements_by_class_name('wpO6b')[0].click()
+                    sleep(2)
 
-                self.driver.find_element_by_class_name('Ypffh').click()
-                self.driver.find_element_by_class_name('Ypffh').send_keys(
-                    random.choice(comments) + Keys.ENTER)
-                sleep(5)
+                    self.driver.find_element_by_class_name('Ypffh').click()
+                    self.driver.find_element_by_class_name('Ypffh').send_keys(
+                        random.choice(comments) + Keys.ENTER)
+                    sleep(5)
 
-                self.driver.find_element_by_link_text('Next').click()
-                sleep(2)
+                    self.driver.find_element_by_link_text('Next').click()
+                    sleep(2)
+                except:
+                    pass
         except:
             pass
 
