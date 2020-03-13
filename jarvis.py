@@ -40,7 +40,7 @@ class Jarvis:
         except:
             print('you are not welcomed here')
 
-    def explore(self, tags, comments, num_pics):
+    def explore(self, tags, comments, posts):
         try:
             self.driver.get(tags_url + random.choice(tags))
             sleep(random.choice(range(1, 4)))
@@ -48,29 +48,35 @@ class Jarvis:
             self.driver.find_elements_by_class_name('_9AhH0')[0].click()
             sleep(random.choice(range(1, 4)))
 
-            for i in range(num_pics):
+            while(posts):
 
                 self.driver.find_elements_by_class_name('wpO6b')[0].click()
                 sleep(random.choice(range(1, 4)))
                 try:
                     self.driver.find_element_by_class_name('Ypffh').click()
                     self.driver.find_element_by_class_name('Ypffh').send_keys(
-                        comments[random.choice(comments)] + Keys.ENTER)
+                        random.choice(comments) + Keys.ENTER)
                     sleep(random.choice(range(5, 7)))
 
                     self.driver.find_element_by_link_text('Next').click()
-                    sleep(random.choice(range(1, 4)))
+                    sleep(random.choice(range(3, 6)))
                 except:
+                    sleep(random.choice(range(1, 3)))
                     self.driver.find_element_by_link_text('Next').click()
+
+                posts -= 1
         except:
             print('exploration map is broken')
 
     def show_love(self):
         try:
-            for i in range(30):
+            posts = 30
+            while(posts):
                 self.driver.execute_script(
                     'window.scrollTo(0, 1100 + document.body.scrollHeight);')
                 sleep(random.choice(range(2, 5)))
+
+                posts -= 1
 
         except:
             print('Jarvis is not feeling lovely')
@@ -95,5 +101,5 @@ class Jarvis:
 
 jarvis = Jarvis(user_name, user_password)
 jarvis.login()
-jarvis.show_love()
-# jarvis.explore(hashtags, comments, 10)
+# jarvis.show_love()
+jarvis.explore(hashtags, comments, 50)
