@@ -3,18 +3,21 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from secrets import user_name, user_password
 from selenium import webdriver
-
-login_url = 'https://www.instagram.com/accounts/login/?source=auth_switcher'
-tags_url = 'https://www.instagram.com/explore/tags/'
-hashtags = ['leagueoflenses', 'nature']
+from random_strings import hashtags, comments
+from urls import login_url, tags_url
+import random
 
 
 class Jarvis:
     def __init__(self, user, password):
-        self.user_name = user
-        self.user_password = password
-        self.driver = webdriver.Chrome(executable_path='./chrome/chromedriver')
-        self.actions = ActionChains(self.driver)
+        try:
+            self.user_name = user
+            self.user_password = password
+            self.driver = webdriver.Chrome(
+                executable_path='./chrome/chromedriver')
+            self.actions = ActionChains(self.driver)
+        except:
+            pass
 
     def login(self):
         try:
@@ -39,38 +42,49 @@ class Jarvis:
         except:
             pass
 
-    def explore(self, tag):
-
-        self.driver.get(tags_url + tag)
-        sleep(2)
-
-        self.driver.find_element_by_xpath(
-            '//*[@id="react-root"]/section/main/article/div[1]/div/div/div[1]/div[1]/a/div/div[2]').click()
-        sleep(2)
-
-        for i in range(10):
-            self.driver.find_element_by_xpath(
-                '/html/body/div[4]/div[2]/div/article/div[2]/section[1]/span[1]/button').click()
+    def explore(self, tags, comments, num_pics):
+        try:
+            self.driver.get(tags_url + random.choice(tags))
             sleep(2)
 
-            self.driver.find_element_by_link_text('Next').click()
+            self.driver.find_elements_by_class_name('_9AhH0')[0].click()
             sleep(2)
+
+            for i in range(num_pics):
+                self.driver.find_elements_by_class_name('wpO6b')[0].click()
+                sleep(2)
+
+                self.driver.find_element_by_class_name('Ypffh').click()
+                self.driver.find_element_by_class_name('Ypffh').send_keys(
+                    random.choice(comments) + Keys.ENTER)
+                sleep(5)
+
+                self.driver.find_element_by_link_text('Next').click()
+                sleep(2)
+        except:
+            pass
 
     def show_love(self):
         print('love')
 
     def write_to_file(self, file_name, text):
-        file = open(file_name, 'w')
-        file.write(text)
-        file.close()
+        try:
+            file = open(file_name, 'w')
+            file.write(text)
+            file.close()
+        except:
+            pass
 
     def read_from_file(self, read_file):
-        file = open(read_file)
-        for line in file:
-            print(line)
-        file.close()
+        try:
+            file = open(read_file)
+            for line in file:
+                print(line)
+            file.close()
+        except:
+            pass
 
 
 jarvis = Jarvis(user_name, user_password)
 jarvis.login()
-jarvis.explore(hashtags[1])
+jarvis.explore(hashtags, comments, 10)
