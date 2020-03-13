@@ -38,7 +38,7 @@ class Jarvis:
             sleep(random.choice(range(1, 3)))
 
         except:
-            pass
+            print('you are not welcomed here')
 
     def explore(self, tags, comments, num_pics):
         try:
@@ -49,10 +49,10 @@ class Jarvis:
             sleep(random.choice(range(1, 4)))
 
             for i in range(num_pics):
-                try:
-                    self.driver.find_elements_by_class_name('wpO6b')[0].click()
-                    sleep(random.choice(range(1, 4)))
 
+                self.driver.find_elements_by_class_name('wpO6b')[0].click()
+                sleep(random.choice(range(1, 4)))
+                try:
                     self.driver.find_element_by_class_name('Ypffh').click()
                     self.driver.find_element_by_class_name('Ypffh').send_keys(
                         comments[random.choice(comments)] + Keys.ENTER)
@@ -61,12 +61,19 @@ class Jarvis:
                     self.driver.find_element_by_link_text('Next').click()
                     sleep(random.choice(range(1, 4)))
                 except:
-                    pass
+                    self.driver.find_element_by_link_text('Next').click()
         except:
-            pass
+            print('exploration map is broken')
 
     def show_love(self):
-        print('love')
+        try:
+            for i in range(30):
+                self.driver.execute_script(
+                    'window.scrollTo(0, 1100 + document.body.scrollHeight);')
+                sleep(random.choice(range(2, 5)))
+
+        except:
+            print('Jarvis is not feeling lovely')
 
     def write_to_file(self, file_name, text):
         try:
@@ -74,7 +81,7 @@ class Jarvis:
             file.write(text)
             file.close()
         except:
-            pass
+            print('no ink in this pen')
 
     def read_from_file(self, read_file):
         try:
@@ -83,9 +90,10 @@ class Jarvis:
                 print(line)
             file.close()
         except:
-            pass
+            print('forgot my reading glasses')
 
 
 jarvis = Jarvis(user_name, user_password)
 jarvis.login()
-jarvis.explore(hashtags, comments, 10)
+jarvis.show_love()
+# jarvis.explore(hashtags, comments, 10)
