@@ -49,13 +49,15 @@ class Jarvis:
             sleep(random.choice(range(1, 4)))
 
             while(posts):
-
                 self.driver.find_elements_by_class_name('wpO6b')[0].click()
                 sleep(random.choice(range(1, 4)))
+
                 try:
                     self.driver.find_element_by_class_name('Ypffh').click()
                     self.driver.find_element_by_class_name('Ypffh').send_keys(
-                        random.choice(comments) + Keys.ENTER)
+                        random.choice(comments))
+                    self.driver.find_element_by_xpath(
+                        '//button[@type="submit"]').click()
                     sleep(random.choice(range(5, 7)))
 
                     self.driver.find_element_by_link_text('Next').click()
@@ -66,20 +68,30 @@ class Jarvis:
 
                 posts -= 1
         except:
-            print('exploration map is broken')
+            print('houston, we have a problem')
 
-    def show_love(self):
+    def show_love(self, posts):
         try:
-            posts = 30
             while(posts):
-                self.driver.execute_script(
-                    'window.scrollTo(0, 1100 + document.body.scrollHeight);')
-                sleep(random.choice(range(2, 5)))
-
+                # self.driver.execute_script(
+                #     """
+                #         console.log(Array.from(document.getElementsByTagName('button')).filter(b => b.classList.contains('wpO6b') && !b.classList.contains('ZQScA')).filter((b, idx) => idx % 5 === 0))
+                #     """
+                # )
+                # self.driver.execute_script(
+                #     'window.scrollTo(0, document.body.scrollHeight);')
+                # sleep(random.choice(range(2, 5)))
+                # sleep(random.choice(range(10, 15)))
+                buttons = self.driver.find_elements_by_class_name('wpO6b')
+                for b in buttons:
+                    svg = b.find_element_by_tag_name('svg')
+                    if svg.get_attribute('aria-label') == 'Like':
+                        b.click()
+                        sleep(random.choice(range(2, 5)))
                 posts -= 1
 
         except:
-            print('Jarvis is not feeling lovely')
+            print('jarvis is not feeling lovely')
 
     def write_to_file(self, file_name, text):
         try:
@@ -101,5 +113,5 @@ class Jarvis:
 
 jarvis = Jarvis(user_name, user_password)
 jarvis.login()
-# jarvis.show_love()
-jarvis.explore(hashtags, comments, 50)
+jarvis.show_love(1)
+# jarvis.explore(hashtags, comments, 50)
