@@ -2,13 +2,13 @@
 
 ## Overview:
 
-Jarvis is a friendly bot that likes users' ig posts and leaves friendly comments on them.
+Jarvis is a friendly bot that likes users' ig posts and leaves friendly comments on them.<br/>
 He was created in Python3 using the Selenium Webdriver API.
 
-He has three ways of interacting with your account:
+Jarvis has three ways of interacting with your account:
 
-- Commenting on and liking posts with a randomly selected hashtag.
-- Commenting on and liking posts from the explore page.
+- Liking and leaving a random comment on posts with a randomly selected hashtag.
+- Liking and leaving a random comment on posts from the explore page.
 - Liking posts from users that you follow.<br/>
   (selection of hashtags and comments are provided by the user.)
 
@@ -54,7 +54,8 @@ A Jarvis instance will have the following properties:
 ### Syntax
 
 `jarvis_instance = Jarvis('username', 'password')`
-<br/>
+
+---
 
 ### `login(self)`
 
@@ -70,7 +71,8 @@ Post conditions:
 ### Syntax
 
 `jarvis_instance.login()`
-<br/>
+
+---
 
 ### `explore(self, tags: list/str, comments: list, posts: int)`
 
@@ -91,7 +93,8 @@ Post conditions:
 
 `jarvis_instance.explore(['sports', 'nature', 'photography'], ['nice!', 'awesome!', 'wow'], 50)` or ...
 `jarvis_instance.explore('assorted', ['nice!', 'awesome!', 'wow'], 50)`
-<br/>
+
+---
 
 ### `show_love(self, posts: int)`
 
@@ -108,4 +111,5 @@ Post conditions:
 ### Syntax
 
 `jarvis_instance.show_love(50)`
-<br/>
+
+---
