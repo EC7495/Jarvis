@@ -42,13 +42,13 @@ Pre conditions:
 Post conditions:<br/>
 A Jarvis instance will have the following properties:
 
-- `self.user_name`
+- `self.user_name`<br/>
   User name provided.
 
-- `self.user_password`
+- `self.user_password`<br/>
   Password provided.
 
-- `self.driver`
+- `self.driver`<br/>
   Selenium Webdriver instance that will be used for DOM interaction.
 
 ### Syntax
@@ -61,8 +61,8 @@ A Jarvis instance will have the following properties:
 
 Pre conditions:
 
-- Active ig account.
-- Correct user name and password combination provided.
+- User has an active ig account.
+- User provided correct user name and password combination.
 
 Post conditions:
 
@@ -107,9 +107,9 @@ Post conditions:
 Pre conditions:
 
 - Jarvis has successfully logged in to the provided account.
-- `posts` (Optional - Default value: `20`)
+- `posts` (Optional - Default value: `20`)<br/>
   An integer denoting how many posts in the feed Jarvis should go through.
-- `user` (Optional - Default value: `None`)
+- `user` (Optional - Default value: `None`)<br/>
   A string that denotes whether Jarvis should show love to all users in feed, or just the user provided. If a user is provided, Jarvis will navigate to that particular user's profile.
 
 Post conditions:

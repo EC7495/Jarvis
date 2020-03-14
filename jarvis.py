@@ -42,6 +42,8 @@ class Jarvis:
         except:
             print('you are not welcomed here')
 
+        return self
+
     # likes and comments on posts with randomly selected hashtag
     def explore(self, tags=[], comments=[], posts=20, follow=False):
         try:
@@ -96,6 +98,8 @@ class Jarvis:
         except:
             print('houston, we have a problem')
 
+        return self
+
     # likes posts from users the provided account is following
     def show_love(self, posts=20, user=None):
         try:
@@ -144,6 +148,8 @@ class Jarvis:
 
         except:
             print('jarvis is not feeling lovely')
+
+        return self
 
     # writes
     def write_to_file(self, file_name, text):
