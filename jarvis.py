@@ -5,7 +5,7 @@ from secrets import user_name, user_password
 from selenium import webdriver
 from random_strings import hashtags, comments
 from urls import login_url, tags_url
-import random
+from random import choice as pick
 
 
 class Jarvis:
@@ -20,23 +20,23 @@ class Jarvis:
     def login(self):
         try:
             self.driver.get(login_url)
-            sleep(random.choice(range(2, 4)))
+            sleep(pick(range(2, 4)))
 
             self.driver.find_element_by_name(
                 'username').send_keys(self.user_name)
-            sleep(random.choice(range(1, 4)))
+            sleep(pick(range(1, 4)))
 
             self.driver.find_element_by_name(
                 'password').send_keys(self.user_password)
-            sleep(random.choice(range(1, 4)))
+            sleep(pick(range(1, 4)))
 
             self.driver.find_element_by_xpath(
                 '//button[@type="submit"]').click()
-            sleep(random.choice(range(4, 6)))
+            sleep(pick(range(4, 6)))
 
             self.driver.find_element_by_xpath(
                 '//button[contains(text(), "Not Now")]').click()
-            sleep(random.choice(range(1, 4)))
+            sleep(pick(range(1, 4)))
 
         except:
             print('you are not welcomed here')
@@ -47,28 +47,28 @@ class Jarvis:
             if tags == 'assorted':
                 self.driver.get('https://www.instagram.com/explore/')
             else:
-                self.driver.get(tags_url + random.choice(tags))
-            sleep(random.choice(range(2, 5)))
+                self.driver.get(tags_url + pick(tags))
+            sleep(pick(range(2, 5)))
 
             self.driver.find_elements_by_class_name('_9AhH0')[0].click()
-            sleep(random.choice(range(1, 4)))
+            sleep(pick(range(1, 4)))
 
             while(posts):
                 self.driver.find_elements_by_class_name('wpO6b')[0].click()
-                sleep(random.choice(range(1, 4)))
+                sleep(pick(range(1, 4)))
 
                 try:
                     self.driver.find_element_by_class_name('Ypffh').click()
                     self.driver.find_element_by_class_name('Ypffh').send_keys(
-                        random.choice(comments))
+                        pick(comments))
                     self.driver.find_element_by_xpath(
                         '//button[@type="submit"]').click()
-                    sleep(random.choice(range(5, 7)))
+                    sleep(pick(range(5, 7)))
 
                     self.driver.find_element_by_link_text('Next').click()
-                    sleep(random.choice(range(3, 6)))
+                    sleep(pick(range(3, 6)))
                 except:
-                    sleep(random.choice(range(1, 3)))
+                    sleep(pick(range(1, 3)))
                     self.driver.find_element_by_link_text('Next').click()
 
                 posts -= 1
@@ -79,16 +79,19 @@ class Jarvis:
     def show_love(self, posts):
         try:
             while(posts):
-                # sleep(random.choice(range(2, 5)))
+                # sleep(pick(range(2, 5)))
                 like_buttons = self.driver.find_elements_by_class_name('wpO6b')
                 for btn in like_buttons:
                     try:
                         svg = btn.find_element_by_tag_name('svg')
-                        if svg.get_attribute('aria-label') == 'Like':
+                        if svg.get_attribute('aria-label') == 'Like' and svg.get_attribute('height') == '24':
                             btn.click()
-                            sleep(random.choice(range(2, 5)))
+                            sleep(pick(range(2, 5)))
                     except:
                         pass
+
+                self.driver.execute_script(
+                    'window.scrollTo(0, document.body.scrollHeight / 1.7);')
 
                 posts -= 1
 
