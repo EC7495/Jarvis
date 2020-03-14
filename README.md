@@ -54,6 +54,7 @@ A Jarvis instance will have the following properties:
 ### Syntax
 
 `jarvis_instance = Jarvis('username', 'password')`
+<br/>
 
 ### `login(self)`
 
@@ -69,6 +70,7 @@ Post conditions:
 ### Syntax
 
 `jarvis_instance.login()`
+<br/>
 
 ### `explore(self, tags: list/str, comments: list, posts: int)`
 
@@ -89,6 +91,7 @@ Post conditions:
 
 `jarvis_instance.explore(['sports', 'nature', 'photography'], ['nice!', 'awesome!', 'wow'], 50)` or ...
 `jarvis_instance.explore('assorted', ['nice!', 'awesome!', 'wow'], 50)`
+<br/>
 
 ### `show_love(self, posts: int)`
 
@@ -105,3 +108,4 @@ Post conditions:
 ### Syntax
 
 `jarvis_instance.show_love(50)`
+<br/>
