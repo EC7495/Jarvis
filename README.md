@@ -10,6 +10,7 @@ Jarvis has three ways of interacting with your account:
 - Liking and leaving a random comment on posts with a randomly selected hashtag.
 - Liking and leaving a random comment on posts from the explore page.
 - Liking posts from users that you follow.<br/>
+  <br/>
   (selection of hashtags and comments are provided by the user.)
 
 Jarvis can also be easily reprogrammed to perform other tasks on your account.
