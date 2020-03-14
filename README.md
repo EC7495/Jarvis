@@ -8,7 +8,7 @@ He has three ways of interacting with your account:
 
 - Commenting on and liking posts with a randomly selected hashtag.
 - Commenting on and liking posts from the explore page.
-- Liking posts from users that you follow.
+- Liking posts from users that you follow
   (selection of hashtags and comments are provided by the user.)
 
 Jarvis can also be easily reprogrammed to perform other tasks on your account.
@@ -76,7 +76,7 @@ Pre conditions:
 - Jarvis has successfully logged in to the provided account.
 - `tags` is a list of strings with length >= 1 representing possible hashtags Jarvis can visit.
   `tags` can also be the string `'assorted'` to tell Jarvis to visit the explore page.
-- ```comments`` is a list of strings with length >= 1 representing possible comments Jarvis can make on a particular post.
+- ``comments` is a list of strings with length >= 1 representing possible comments Jarvis can make on a particular post.
 - `posts` is an integer >= 0 that tells Jarvis how many posts to go through.
 
 Post conditions:
