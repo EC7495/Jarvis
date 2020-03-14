@@ -3,12 +3,13 @@
 ## Overview:
 
 Jarvis is a friendly bot that likes users' ig posts and leaves friendly comments on them.
+He was created in Python3 using the Selenium Webdriver API
 
 He has three ways of interacting with your account:
 
 - Commenting on and liking posts with a randomly selected hashtag.
 - Commenting on and liking posts from the explore page.
-- Liking posts from users that you follow<br/>
+- Liking posts from users that you follow.<br/>
   (selection of hashtags and comments are provided by the user.)
 
 Jarvis can also be easily reprogrammed to perform other tasks on your account.
@@ -17,15 +18,15 @@ Jarvis can also be easily reprogrammed to perform other tasks on your account.
 
 To use Jarvis, you will need to fork and or clone this repo, and install the following tools:
 
-- Selenium Python package
-  `pip install selenium`
+- Selenium Python package<br/>
+  `pip install selenium`<br/>
   This will allow acces to the Selenium Webdriver API for automated interactions with the DOM.
 
-- ChromeDriver
-  http://chromedriver.chromium.org/
+- ChromeDriver<br/>
+  http://chromedriver.chromium.org/<br/>
   This will allow automated navigation capabilities in the Google Chrome web browser
 
-Remember to change the executable path in the Jarvis `__init__` method to be the path of your own ChromeDrive executable file.
+Remember to change the executable path for `self.driver` in the Jarvis `__init__` method to be the path of your own ChromeDrive executable file.
 
 ## Jarvis API:
 
@@ -76,7 +77,7 @@ Pre conditions:
 - Jarvis has successfully logged in to the provided account.
 - `tags` is a list of strings with length >= 1 representing possible hashtags Jarvis can visit.
   `tags` can also be the string `'assorted'` to tell Jarvis to visit the explore page.
-- ``comments` is a list of strings with length >= 1 representing possible comments Jarvis can make on a particular post.
+- `comments` is a list of strings with length >= 1 representing possible comments Jarvis can make on a particular post.
 - `posts` is an integer >= 0 that tells Jarvis how many posts to go through.
 
 Post conditions:
