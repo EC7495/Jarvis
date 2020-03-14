@@ -10,24 +10,25 @@ import random
 
 class Jarvis:
     def __init__(self, user, password):
-
         self.user_name = user
         self.user_password = password
         self.driver = webdriver.Chrome(
             executable_path='./chrome/chromedriver')
         self.actions = ActionChains(self.driver)
 
+    # logs in to the account provided
     def login(self):
         try:
             self.driver.get(login_url)
-            sleep(random.choice(range(1, 4)))
+            sleep(random.choice(range(2, 4)))
 
-            self.driver.find_element_by_name('username').send_keys(user_name)
+            self.driver.find_element_by_name(
+                'username').send_keys(self.user_name)
             sleep(random.choice(range(1, 4)))
 
             self.driver.find_element_by_name(
-                'password').send_keys(user_password)
-            sleep(random.choice(range(1, 3)))
+                'password').send_keys(self.user_password)
+            sleep(random.choice(range(1, 4)))
 
             self.driver.find_element_by_xpath(
                 '//button[@type="submit"]').click()
@@ -35,15 +36,19 @@ class Jarvis:
 
             self.driver.find_element_by_xpath(
                 '//button[contains(text(), "Not Now")]').click()
-            sleep(random.choice(range(1, 3)))
+            sleep(random.choice(range(1, 4)))
 
         except:
             print('you are not welcomed here')
 
+    # likes and comments on posts with randomly selected hashtag
     def explore(self, tags, comments, posts):
         try:
-            self.driver.get(tags_url + random.choice(tags))
-            sleep(random.choice(range(1, 4)))
+            if tags == 'assorted':
+                self.driver.get('https://www.instagram.com/explore/')
+            else:
+                self.driver.get(tags_url + random.choice(tags))
+            sleep(random.choice(range(2, 5)))
 
             self.driver.find_elements_by_class_name('_9AhH0')[0].click()
             sleep(random.choice(range(1, 4)))
@@ -70,29 +75,27 @@ class Jarvis:
         except:
             print('houston, we have a problem')
 
+    # likes posts from users the provided account is following
     def show_love(self, posts):
         try:
             while(posts):
-                # self.driver.execute_script(
-                #     """
-                #         console.log(Array.from(document.getElementsByTagName('button')).filter(b => b.classList.contains('wpO6b') && !b.classList.contains('ZQScA')).filter((b, idx) => idx % 5 === 0))
-                #     """
-                # )
-                # self.driver.execute_script(
-                #     'window.scrollTo(0, document.body.scrollHeight);')
                 # sleep(random.choice(range(2, 5)))
-                # sleep(random.choice(range(10, 15)))
-                buttons = self.driver.find_elements_by_class_name('wpO6b')
-                for b in buttons:
-                    svg = b.find_element_by_tag_name('svg')
-                    if svg.get_attribute('aria-label') == 'Like':
-                        b.click()
-                        sleep(random.choice(range(2, 5)))
+                like_buttons = self.driver.find_elements_by_class_name('wpO6b')
+                for btn in like_buttons:
+                    try:
+                        svg = btn.find_element_by_tag_name('svg')
+                        if svg.get_attribute('aria-label') == 'Like':
+                            btn.click()
+                            sleep(random.choice(range(2, 5)))
+                    except:
+                        pass
+
                 posts -= 1
 
         except:
             print('jarvis is not feeling lovely')
 
+    # writes
     def write_to_file(self, file_name, text):
         try:
             file = open(file_name, 'w')
@@ -101,6 +104,7 @@ class Jarvis:
         except:
             print('no ink in this pen')
 
+    # reads from specified file
     def read_from_file(self, read_file):
         try:
             file = open(read_file)
@@ -113,5 +117,6 @@ class Jarvis:
 
 jarvis = Jarvis(user_name, user_password)
 jarvis.login()
-jarvis.show_love(1)
+jarvis.show_love(10)
 # jarvis.explore(hashtags, comments, 50)
+# jarvis.explore('assorted', comments, 50)
