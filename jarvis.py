@@ -34,9 +34,13 @@ class Jarvis:
                 '//button[@type="submit"]').click()
             sleep(pick(range(4, 6)))
 
-            self.driver.find_element_by_xpath(
-                '//button[contains(text(), "Not Now")]').click()
-            sleep(pick(range(1, 4)))
+            try:
+                self.driver.find_element_by_xpath(
+                    '//button[contains(text(), "Not Now")]').click()
+                sleep(pick(range(1, 4)))
+
+            except:
+                pass
 
         except:
             print('you are not welcomed here')
@@ -67,6 +71,7 @@ class Jarvis:
 
                     self.driver.find_element_by_link_text('Next').click()
                     sleep(pick(range(3, 6)))
+
                 except:
                     sleep(pick(range(1, 3)))
                     self.driver.find_element_by_link_text('Next').click()
@@ -87,6 +92,7 @@ class Jarvis:
                         if svg.get_attribute('aria-label') == 'Like' and svg.get_attribute('height') == '24':
                             btn.click()
                             sleep(pick(range(2, 5)))
+
                     except:
                         pass
 
@@ -104,6 +110,7 @@ class Jarvis:
             file = open(file_name, 'w')
             file.write(text)
             file.close()
+
         except:
             print('no ink in this pen')
 
@@ -114,6 +121,7 @@ class Jarvis:
             for line in file:
                 print(line)
             file.close()
+
         except:
             print('forgot my reading glasses')
 
