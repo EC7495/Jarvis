@@ -61,8 +61,8 @@ A Jarvis instance will have the following properties:
 
 Pre conditions:
 
-- Active ig account
-- Correct user name and password combination provided
+- Active ig account.
+- Correct user name and password combination provided.
 
 Post conditions:
 
