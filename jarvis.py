@@ -1,10 +1,8 @@
 from time import sleep
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
 from secrets import user_name, user_password
 from selenium import webdriver
 from random_strings import hashtags, comments
-from urls import login_url, tags_url
+from urls import login_url, tags_url, explore_page_url, user_url
 from random import choice, uniform
 
 
@@ -14,7 +12,6 @@ class Jarvis:
         self.user_password = password
         self.driver = webdriver.Chrome(
             executable_path='./chrome/chromedriver')
-        self.actions = ActionChains(self.driver)
 
     # logs in to the account provided
     def login(self):
@@ -46,15 +43,18 @@ class Jarvis:
             print('you are not welcomed here')
 
     # likes and comments on posts with randomly selected hashtag
-    def explore(self, tags, comments, posts, follow=False):
+    def explore(self, tags=[], comments=[], posts=20, follow=False):
         try:
-            if tags == 'assorted':
-                self.driver.get('https://www.instagram.com/explore/')
-            else:
+            comments_on = True if len(comments) else False
+
+            if len(tags):
                 self.driver.get(tags_url + choice(tags))
+            else:
+                self.driver.get(explore_page_url)
+
             sleep(choice(range(2, 5)))
 
-            self.driver.find_elements_by_class_name('_9AhH0')[0].click()
+            self.driver.find_element_by_class_name('_9AhH0').click()
             sleep(choice(range(2, 4)))
 
             while(posts):
@@ -70,51 +70,77 @@ class Jarvis:
                         except:
                             pass
 
-                    like_btn = self.driver.find_elements_by_class_name('wpO6b')[
-                        0]
+                    like_btn = self.driver.find_element_by_class_name('wpO6b')
                     if like_btn.find_element_by_tag_name('svg').get_attribute('aria-label') == 'Like':
                         like_btn.click()
                     sleep(choice(range(2, 4)))
 
-                    self.driver.find_element_by_class_name('Ypffh').click()
-                    self.driver.find_element_by_class_name('Ypffh').send_keys(
-                        choice(comments))
-                    sleep(choice(range(2, 4)))
+                    if comments_on:
+                        self.driver.find_element_by_class_name('Ypffh').click()
+                        self.driver.find_element_by_class_name('Ypffh').send_keys(
+                            choice(comments))
+                        sleep(choice(range(2, 4)))
 
-                    self.driver.find_element_by_xpath(
-                        '//button[@type="submit"]').click()
-                    sleep(choice(range(5, 7)))
+                        self.driver.find_element_by_xpath(
+                            '//button[@type="submit"]').click()
+                        sleep(choice(range(5, 7)))
 
                     self.driver.find_element_by_link_text('Next').click()
                     sleep(choice(range(3, 6)))
 
                 except:
-                    sleep(choice(range(2, 4)))
                     self.driver.find_element_by_link_text('Next').click()
+                    sleep(choice(range(2, 4)))
 
                 posts -= 1
         except:
             print('houston, we have a problem')
 
     # likes posts from users the provided account is following
-    def show_love(self, posts):
+    def show_love(self, posts=20, user=None):
         try:
-            while(posts):
-                like_buttons = self.driver.find_elements_by_class_name('wpO6b')
-                for btn in like_buttons:
+            if user:
+                self.driver.get(user_url + user)
+                sleep(choice(range(2, 5)))
+
+                self.driver.find_element_by_class_name('_9AhH0').click()
+                sleep(choice(range(2, 4)))
+
+                while(posts):
                     try:
-                        svg = btn.find_element_by_tag_name('svg')
-                        if svg.get_attribute('aria-label') == 'Like' and svg.get_attribute('height') == '24':
-                            btn.click()
-                            sleep(choice(range(2, 5)))
+                        # like_btn = self.driver.find_elements_by_class_name(
+                        #     'wpO6b')[0]
+                        like_btn = self.driver.find_element_by_xpath(
+                            '/html/body/div[4]/div[2]/div/article/div[2]/section[1]/span[1]/button')
+                        if like_btn.find_element_by_tag_name('svg').get_attribute('aria-label') == 'Like':
+                            like_btn.click()
+                        sleep(choice(range(2, 4)))
+
+                        self.driver.find_element_by_link_text('Next').click()
+                        sleep(choice(range(3, 6)))
 
                     except:
-                        pass
+                        self.driver.find_element_by_link_text('Next').click()
+                        sleep(choice(range(3, 6)))
 
-                self.driver.execute_script(
-                    'window.scrollTo(0, document.body.scrollHeight / 1.8);')
+            else:
+                while(posts):
+                    like_buttons = self.driver.find_elements_by_class_name(
+                        'wpO6b')
+                    for btn in like_buttons:
+                        try:
+                            svg = btn.find_element_by_tag_name('svg')
+                            if svg.get_attribute('aria-label') == 'Like' and svg.get_attribute('height') == '24':
+                                btn.click()
+                                sleep(choice(range(2, 5)))
 
-                posts -= 1
+                        except:
+                            pass
+
+                    self.driver.execute_script(
+                        'window.scrollTo(0, document.body.scrollHeight / 1.8);')
+
+                    posts -= 1
 
         except:
             print('jarvis is not feeling lovely')
@@ -143,6 +169,6 @@ class Jarvis:
 
 jarvis = Jarvis(user_name, user_password)
 jarvis.login()
-# jarvis.show_love(20)
-jarvis.explore(hashtags, comments, 20, True)
-# jarvis.explore('assorted', comments, 50)
+jarvis.show_love(59, 'rgutierrez7')
+# jarvis.explore([], [], 59, False)
+# jarvis.explore(hashtags, comments, 20, True)
