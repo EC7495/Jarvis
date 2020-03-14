@@ -5,7 +5,7 @@ from secrets import user_name, user_password
 from selenium import webdriver
 from random_strings import hashtags, comments
 from urls import login_url, tags_url
-from random import choice as pick
+from random import choice, uniform
 
 
 class Jarvis:
@@ -20,24 +20,24 @@ class Jarvis:
     def login(self):
         try:
             self.driver.get(login_url)
-            sleep(pick(range(2, 4)))
+            sleep(choice(range(2, 4)))
 
             self.driver.find_element_by_name(
                 'username').send_keys(self.user_name)
-            sleep(pick(range(1, 4)))
+            sleep(choice(range(1, 4)))
 
             self.driver.find_element_by_name(
                 'password').send_keys(self.user_password)
-            sleep(pick(range(1, 4)))
+            sleep(choice(range(1, 4)))
 
             self.driver.find_element_by_xpath(
                 '//button[@type="submit"]').click()
-            sleep(pick(range(4, 6)))
+            sleep(choice(range(4, 6)))
 
             try:
                 self.driver.find_element_by_xpath(
                     '//button[contains(text(), "Not Now")]').click()
-                sleep(pick(range(1, 4)))
+                sleep(choice(range(1, 4)))
 
             except:
                 pass
@@ -46,34 +46,45 @@ class Jarvis:
             print('you are not welcomed here')
 
     # likes and comments on posts with randomly selected hashtag
-    def explore(self, tags, comments, posts):
+    def explore(self, tags, comments, posts, follow=False):
         try:
             if tags == 'assorted':
                 self.driver.get('https://www.instagram.com/explore/')
             else:
-                self.driver.get(tags_url + pick(tags))
-            sleep(pick(range(2, 5)))
+                self.driver.get(tags_url + choice(tags))
+            sleep(choice(range(2, 5)))
 
             self.driver.find_elements_by_class_name('_9AhH0')[0].click()
-            sleep(pick(range(1, 4)))
+            sleep(choice(range(1, 4)))
 
             while(posts):
-                self.driver.find_elements_by_class_name('wpO6b')[0].click()
-                sleep(pick(range(1, 4)))
-
                 try:
+                    if follow:
+                        try:
+                            self.driver.find_element_by_xpath(
+                                '//button[contains(text(), "Follow")]').click()
+                            sleep(choice(range(2, 4)))
+
+                        except:
+                            pass
+
+                    self.driver.find_elements_by_class_name('wpO6b')[0].click()
+                    sleep(choice(range(1, 4)))
+
                     self.driver.find_element_by_class_name('Ypffh').click()
                     self.driver.find_element_by_class_name('Ypffh').send_keys(
-                        pick(comments))
+                        choice(comments))
+                    sleep(choice(range(1, 3)))
+
                     self.driver.find_element_by_xpath(
                         '//button[@type="submit"]').click()
-                    sleep(pick(range(5, 7)))
+                    sleep(choice(range(5, 7)))
 
                     self.driver.find_element_by_link_text('Next').click()
-                    sleep(pick(range(3, 6)))
+                    sleep(choice(range(3, 6)))
 
                 except:
-                    sleep(pick(range(1, 3)))
+                    sleep(choice(range(1, 3)))
                     self.driver.find_element_by_link_text('Next').click()
 
                 posts -= 1
@@ -84,20 +95,19 @@ class Jarvis:
     def show_love(self, posts):
         try:
             while(posts):
-                # sleep(pick(range(2, 5)))
                 like_buttons = self.driver.find_elements_by_class_name('wpO6b')
                 for btn in like_buttons:
                     try:
                         svg = btn.find_element_by_tag_name('svg')
                         if svg.get_attribute('aria-label') == 'Like' and svg.get_attribute('height') == '24':
                             btn.click()
-                            sleep(pick(range(2, 5)))
+                            sleep(choice(range(2, 5)))
 
                     except:
                         pass
 
                 self.driver.execute_script(
-                    'window.scrollTo(0, document.body.scrollHeight / 1.7);')
+                    'window.scrollTo(0, document.body.scrollHeight / 1.8);')
 
                 posts -= 1
 
@@ -128,6 +138,6 @@ class Jarvis:
 
 jarvis = Jarvis(user_name, user_password)
 jarvis.login()
-# jarvis.show_love(10)
-# jarvis.explore(hashtags, comments, 50)
+# jarvis.show_love(20)
+jarvis.explore(hashtags, comments, 20, True)
 # jarvis.explore('assorted', comments, 50)
