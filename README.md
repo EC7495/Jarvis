@@ -25,7 +25,7 @@ To use Jarvis, you will need to fork and or clone this repo, and install the fol
 
 - ChromeDriver<br/>
   http://chromedriver.chromium.org/<br/>
-  This will allow automated navigation capabilities in the Google Chrome web browser
+  This will allow automated navigation capabilities in the Google Chrome web browser.
 
 Remember to change the executable path for `self.driver` in the Jarvis `__init__` method to be the path of your own ChromeDrive executable file.
 
@@ -37,7 +37,7 @@ Pre conditions:
 
 - User has successfully installed Selenium and ChromeDriver
 
-Post conditions:
+Post conditions:<br/>
 A Jarvis instance will have the following properties:
 
 - `self.user_name`
@@ -67,7 +67,7 @@ Pre conditions:
 
 Post conditions:
 
-- Logs in to the account provided. Execution terminates once home page is reached
+- Logs in to the account provided. Execution terminates once home page is reached.
 
 ### Syntax
 
