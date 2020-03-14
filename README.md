@@ -95,9 +95,9 @@ Post conditions:
 
 ### Syntax
 
-`jarvis_instance.explore()` or ...
-`jarvis_instance.explore(['sports', 'nature', 'photography'], ['nice!', 'awesome!', 'wow'], 50, True)` or ...
-`jarvis_instance.explore([], [], 50, True)` or ...
+`jarvis_instance.explore()` or ...<br/>
+`jarvis_instance.explore(['sports', 'nature', 'photography'], ['nice!', 'awesome!', 'wow'], 50, True)` or ...<br/>
+`jarvis_instance.explore([], [], 50, True)` or ...<br/>
 `jarvis_instance.explore(['photography'], [], 50, True)`
 
 ---
@@ -119,7 +119,7 @@ Post conditions:
 
 ### Syntax
 
-`jarvis_instance.show_love()` or ...
+`jarvis_instance.show_love()` or ...<br/>
 `jarvis_instance.show_love(50, 'your_bff_user_name')`
 
 ---
