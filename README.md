@@ -8,7 +8,7 @@ He has three ways of interacting with your account:
 
 - Commenting on and liking posts with a randomly selected hashtag.
 - Commenting on and liking posts from the explore page.
-- Liking posts from users that you follow\n
+- Liking posts from users that you follow<br/>
   (selection of hashtags and comments are provided by the user.)
 
 Jarvis can also be easily reprogrammed to perform other tasks on your account.
