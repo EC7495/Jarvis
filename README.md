@@ -3,7 +3,7 @@
 ## Overview:
 
 Jarvis is a friendly bot that likes users' ig posts and leaves friendly comments on them.
-He was created in Python3 using the Selenium Webdriver API
+He was created in Python3 using the Selenium Webdriver API.
 
 He has three ways of interacting with your account:
 
