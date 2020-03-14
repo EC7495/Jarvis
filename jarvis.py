@@ -24,11 +24,11 @@ class Jarvis:
 
             self.driver.find_element_by_name(
                 'username').send_keys(self.user_name)
-            sleep(choice(range(1, 4)))
+            sleep(choice(range(2, 4)))
 
             self.driver.find_element_by_name(
                 'password').send_keys(self.user_password)
-            sleep(choice(range(1, 4)))
+            sleep(choice(range(2, 4)))
 
             self.driver.find_element_by_xpath(
                 '//button[@type="submit"]').click()
@@ -37,7 +37,7 @@ class Jarvis:
             try:
                 self.driver.find_element_by_xpath(
                     '//button[contains(text(), "Not Now")]').click()
-                sleep(choice(range(1, 4)))
+                sleep(choice(range(2, 4)))
 
             except:
                 pass
@@ -55,26 +55,31 @@ class Jarvis:
             sleep(choice(range(2, 5)))
 
             self.driver.find_elements_by_class_name('_9AhH0')[0].click()
-            sleep(choice(range(1, 4)))
+            sleep(choice(range(2, 4)))
 
             while(posts):
                 try:
                     if follow:
                         try:
-                            self.driver.find_element_by_xpath(
-                                '//button[contains(text(), "Follow")]').click()
+                            follow_btn = self.driver.find_element_by_class_name(
+                                'bY2yH').find_element_by_tag_name('button')
+                            if follow_btn.get_attribute('innerText') == 'Follow' and uniform(0, 1) > 0.5:
+                                follow_btn.click()
                             sleep(choice(range(2, 4)))
 
                         except:
                             pass
 
-                    self.driver.find_elements_by_class_name('wpO6b')[0].click()
-                    sleep(choice(range(1, 4)))
+                    like_btn = self.driver.find_elements_by_class_name('wpO6b')[
+                        0]
+                    if like_btn.find_element_by_tag_name('svg').get_attribute('aria-label') == 'Like':
+                        like_btn.click()
+                    sleep(choice(range(2, 4)))
 
                     self.driver.find_element_by_class_name('Ypffh').click()
                     self.driver.find_element_by_class_name('Ypffh').send_keys(
                         choice(comments))
-                    sleep(choice(range(1, 3)))
+                    sleep(choice(range(2, 4)))
 
                     self.driver.find_element_by_xpath(
                         '//button[@type="submit"]').click()
@@ -84,7 +89,7 @@ class Jarvis:
                     sleep(choice(range(3, 6)))
 
                 except:
-                    sleep(choice(range(1, 3)))
+                    sleep(choice(range(2, 4)))
                     self.driver.find_element_by_link_text('Next').click()
 
                 posts -= 1
