@@ -120,6 +120,6 @@ class Jarvis:
 
 jarvis = Jarvis(user_name, user_password)
 jarvis.login()
-jarvis.show_love(10)
+# jarvis.show_love(10)
 # jarvis.explore(hashtags, comments, 50)
 # jarvis.explore('assorted', comments, 50)
