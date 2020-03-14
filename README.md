@@ -5,11 +5,13 @@
 Jarvis is a friendly bot that likes users' ig posts and leaves friendly comments on them.<br/>
 He was created in Python3 using the Selenium Webdriver API.
 
-Jarvis has three ways of interacting with your account:
+Jarvis has various ways of interacting with your account:
 
-- Liking and leaving a random comment on posts with a randomly selected hashtag.
+- Following users from the explore page.
 - Liking and leaving a random comment on posts from the explore page.
-- Liking posts from users that you follow.<br/>
+- Liking and leaving a random comment on posts with a randomly selected hashtag.
+- Liking posts from all users that you follow.
+- Liking posts from a particular user.
   <br/>
   (selection of hashtags and comments are provided by the user.)
 
@@ -49,9 +51,6 @@ A Jarvis instance will have the following properties:
 - `self.driver`
   Selenium Webdriver instance that will be used for DOM interaction.
 
-- `self.actions`
-  selenium.webdriver.common.action_chains instance for additional complex DOM related functionalities (such as drag and drop.)
-
 ### Syntax
 
 `jarvis_instance = Jarvis('username', 'password')`
@@ -75,42 +74,52 @@ Post conditions:
 
 ---
 
-### `explore(self, tags: list/str, comments: list, posts: int)`
+### `explore(self, tags: list, comments: list, posts: int, follow: bool)`
 
 Pre conditions:
 
 - Jarvis has successfully logged in to the provided account.
-- `tags` is a list of strings with length >= 1 representing possible hashtags Jarvis can visit.
-  `tags` can also be the string `'assorted'` to tell Jarvis to visit the explore page.
-- `comments` is a list of strings with length >= 1 representing possible comments Jarvis can make on a particular post.
-- `posts` is an integer >= 0 that tells Jarvis how many posts to go through.
+- `tags` (Optional - Default value: `[]`)<br/>
+  A list of strings representing possible hashtags Jarvis can visit. If empty, Jarvis will navigate to explore page
+- `comments` (Optional - Default value: `[]`)<br/>
+  A list of strings representing possible comments Jarvis can make on a particular post.
+  Jarvis will not comment if list of comments is empty.
+- `posts` (Optional - Default value: `20`)<br/>
+  An integer denoting how many posts Jarvis should go through.
+- `follow` (Optional - Default value: `False`)<br/>
+  A boolean (or any other truthy/falsy value) denoting whether Jarvis should follow users as he likes and comments on their post or not.
 
 Post conditions:
 
-- Jarvis will go through the specified amount of posts, from either the explore page or hashtags page,
-  liking and leaving a randomly selected comment on each one.
+- Jarvis will go through the specified amount of posts, from either the explore page or hashtags page, liking and leaving a randomly selected comment on each one. There is approximately a 50% chance that Jarvis will follow the user of a particular post (can be adjusted in the `explore` method's logic) if `follow` is set to `True`.
 
 ### Syntax
 
-`jarvis_instance.explore(['sports', 'nature', 'photography'], ['nice!', 'awesome!', 'wow'], 50)` or ...
-`jarvis_instance.explore('assorted', ['nice!', 'awesome!', 'wow'], 50)`
+`jarvis_instance.explore()` or ...
+`jarvis_instance.explore(['sports', 'nature', 'photography'], ['nice!', 'awesome!', 'wow'], 50, True)` or ...
+`jarvis_instance.explore([], [], 50, True)` or ...
+`jarvis_instance.explore(['photography'], [], 50, True)`
 
 ---
 
-### `show_love(self, posts: int)`
+### `show_love(self, posts: int, user: str)`
 
 Pre conditions:
 
 - Jarvis has successfully logged in to the provided account.
-- `posts` is an integer >= 0 that tells Jarvis how many posts to go through.
+- `posts` (Optional - Default value: `20`)
+  An integer denoting how many posts in the feed Jarvis should go through.
+- `user` (Optional - Default value: `None`)
+  A string that denotes whether Jarvis should show love to all users in feed, or just the user provided. If a user is provided, Jarvis will navigate to that particular user's profile.
 
 Post conditions:
 
-- Jarvis will go through the specified amount of posts in your feed liking approximately 60% of them.
-  The rest will be skipped as Jarvis scrolls past them.
+- Jarvis will go through the specified amount of posts in your feed, liking approximately 60% of them.
+  The rest will be skipped as Jarvis scrolls past them. If a user is provided, Jarvis will navigate to their profile and go through the specified amount of posts, liking all unliked posts he comes across.
 
 ### Syntax
 
-`jarvis_instance.show_love(50)`
+`jarvis_instance.show_love()` or ...
+`jarvis_instance.show_love(50, 'your_bff_user_name')`
 
 ---
