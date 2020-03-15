@@ -174,7 +174,7 @@ class Jarvis:
 
 
 jarvis = Jarvis(user_name, user_password)
-jarvis.login()
+jarvis.login().explore([], [], 20, False)
 # jarvis.show_love(59, 'oj21_')
-# jarvis.explore([], [], 59, False)
+# jarvis.explore([], [], 20, False)
 # jarvis.explore(hashtags, comments, 20, True)
