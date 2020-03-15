@@ -59,24 +59,23 @@ class Jarvis:
             self.driver.find_element_by_class_name('_9AhH0').click()
             sleep(choice(range(2, 4)))
 
+            user = self.driver.find_element_by_class_name(
+                'e1e1d').get_attribute('innerText')
+            text = ('Date: %d/%d/%d' % (localtime()
+                                        [1], localtime()[2], localtime()[0]) + '\n' +
+                    'Start Run: %d:%d' % (localtime()[3], localtime()[4]) + '\n\n' +
+                    '-' * 25 + '\n' +
+                    'User: ' + user + '\n')
+            file = self.write_to_file('log.txt', text)
+
             while(posts):
                 try:
-                    user = self.driver.find_element_by_class_name(
-                        'e1e1d').get_attribute('innerText')
-                    text = ('Date: %d/%d/%d' % (localtime()
-                                                [1], localtime()[2], localtime()[0]) + '\n' +
-                            'Start Run: %d:%d' % (localtime()[3], localtime()[4]) + '\n\n' +
-                            '-' * 25 + '\n' +
-                            'User: ' + user + '\n')
-                    file = self.write_to_file('log.txt', text)
-
                     if follow:
                         try:
-                            self.write_to_file(file, 'Followed\n')
-
                             follow_btn = self.driver.find_element_by_class_name(
                                 'bY2yH').find_element_by_tag_name('button')
-                            if follow_btn.get_attribute('innerText') == 'Follow' and uniform(0, 1) > 0.5:
+                            if follow_btn.get_attribute('innerText') == 'Follow' and uniform(0, 1) > 0.4:
+                                self.write_to_file(file, 'Followed\n')
                                 follow_btn.click()
                             sleep(choice(range(2, 4)))
 
@@ -88,7 +87,7 @@ class Jarvis:
                         like_btn.click()
                     sleep(choice(range(2, 4)))
 
-                    if comments_on and uniform(0, 1) > 0.5:
+                    if comments_on and uniform(0, 1) > 0.25:
                         comment = choice(comments)
                         self.write_to_file(
                             file, ('Comment: ' + comment + '\n' + '-' * 25 + '\n\n'))
@@ -115,6 +114,8 @@ class Jarvis:
 
         self.write_to_file(file, 'End Run: %d:%d' %
                            (localtime()[3], localtime()[4]) + '\n\n' + '*' * 40 + '\n\n')
+        self.driver.find_elements_by_class_name('wpO6b')[-1].click()
+
         return self
 
     # likes posts from users the provided account is following
@@ -226,7 +227,7 @@ class Jarvis:
     # reads from specified file
     def read_from_file(self, read_file):
         try:
-            file = open(read_file)
+            file = open(read_file, 'r')
             for line in file:
                 print(line)
             file.close()
