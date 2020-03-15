@@ -68,11 +68,11 @@ class Jarvis:
                             'Start Run: %d:%d' % (localtime()[3], localtime()[4]) + '\n\n' +
                             '-' * 25 + '\n' +
                             'User: ' + user + '\n')
-                    self.write_to_file('log.txt', text)
+                    file = self.write_to_file('log.txt', text)
 
                     if follow:
                         try:
-                            self.write_to_file('log.txt', 'Followed\n')
+                            self.write_to_file(file, 'Followed\n')
 
                             follow_btn = self.driver.find_element_by_class_name(
                                 'bY2yH').find_element_by_tag_name('button')
@@ -91,7 +91,7 @@ class Jarvis:
                     if comments_on and uniform(0, 1) > 0.5:
                         comment = choice(comments)
                         self.write_to_file(
-                            'log.txt', ('Comment: ' + comment + '\n' + '-' * 25 + '\n\n'))
+                            file, ('Comment: ' + comment + '\n' + '-' * 25 + '\n\n'))
 
                         self.driver.find_element_by_class_name('Ypffh').click()
                         self.driver.find_element_by_class_name(
@@ -113,7 +113,7 @@ class Jarvis:
         except:
             return('houston, we have a problem')
 
-        self.write_to_file('log.txt', 'End Run: %d:%d' %
+        self.write_to_file(file, 'End Run: %d:%d' %
                            (localtime()[3], localtime()[4]) + '\n\n' + '*' * 40 + '\n\n')
         return self
 
@@ -214,7 +214,7 @@ class Jarvis:
     # writes
     def write_to_file(self, file_name, text):
         try:
-            file = open(file_name, 'w')
+            file = open(file_name, 'a')
             file.write(text)
             file.close()
 
@@ -238,6 +238,6 @@ class Jarvis:
 
 
 jarvis = Jarvis(user_name, user_password)
-jarvis.login().explore(hashtags, comments, 30, False)
+jarvis.login().explore(hashtags, comments, 10, True)
 # jarvis.login().show_love()
 # jarvis.login().share('Levelin up 20', ['memes', 'funny'], 10)
