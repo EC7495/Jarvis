@@ -112,8 +112,6 @@ class Jarvis:
 
                 while(posts):
                     try:
-                        # like_btn = self.driver.find_elements_by_class_name(
-                        #     'wpO6b')[0]
                         like_btn = self.driver.find_element_by_xpath(
                             '/html/body/div[4]/div[2]/div/article/div[2]/section[1]/span[1]/button')
                         if like_btn.find_element_by_tag_name('svg').get_attribute('aria-label') == 'Like':
@@ -151,6 +149,51 @@ class Jarvis:
 
         return self
 
+    def share(self, recipient, tags=[], posts=20):
+        try:
+            if len(tags):
+                self.driver.get(tags_url + choice(tags))
+            else:
+                self.driver.get(explore_page_url)
+
+            sleep(choice(range(2, 5)))
+
+            self.driver.find_element_by_class_name('_9AhH0').click()
+            sleep(choice(range(2, 4)))
+
+            while(posts):
+                try:
+                    if uniform(0, 1) > 0.6:
+                        self.driver.find_element_by_xpath(
+                            '/html/body/div[4]/div[2]/div/article/div[2]/section[1]/button').click()
+                        sleep(choice(range(2, 4)))
+
+                        self.driver.find_element_by_xpath(
+                            '//div[contains(text(), "Share to Direct")]').click()
+                        sleep(choice(range(2, 4)))
+
+                        self.driver.find_element_by_name(
+                            'queryBox').send_keys(recipient)
+                        sleep(choice(range(2, 4)))
+
+                        self.driver.find_element_by_class_name(
+                            'glyphsSpriteCircle__outline__24__grey_2').click()
+                        sleep(choice(range(2, 4)))
+
+                        self.driver.find_element_by_xpath(
+                            '//button[contains(text(), "Send")]').click()
+                        sleep(choice(range(2, 4)))
+
+                    self.driver.find_element_by_link_text('Next').click()
+                    sleep(choice(range(3, 6)))
+
+                except:
+                    self.driver.find_element_by_link_text('Next').click()
+                    sleep(choice(range(3, 6)))
+
+        except:
+            print('jarvis is being greedy')
+
     # writes
     def write_to_file(self, file_name, text):
         try:
@@ -174,7 +217,6 @@ class Jarvis:
 
 
 jarvis = Jarvis(user_name, user_password)
-jarvis.login().explore([], [], 20, False)
-# jarvis.show_love(59, 'oj21_')
-# jarvis.explore([], [], 20, False)
-# jarvis.explore(hashtags, comments, 20, True)
+# jarvis.login().explore([], [], 20, False)
+# jarvis.login().show_love()
+jarvis.login().share('Levelin up 20', ['memes', 'funny'], 10)
