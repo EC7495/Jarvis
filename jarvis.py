@@ -1,4 +1,4 @@
-from time import sleep
+from time import sleep, localtime
 from secrets import user_name, user_password
 from selenium import webdriver
 from random_strings import hashtags, comments
@@ -40,7 +40,7 @@ class Jarvis:
                 pass
 
         except:
-            print('you are not welcomed here')
+            return('you are not welcomed here')
 
         return self
 
@@ -61,8 +61,19 @@ class Jarvis:
 
             while(posts):
                 try:
+                    user = self.driver.find_element_by_class_name(
+                        'e1e1d').get_attribute('innerText')
+                    text = ('Date: %d/%d/%d' % (localtime()
+                                                [1], localtime()[2], localtime()[0]) + '\n' +
+                            'Start Run: %d:%d' % (localtime()[3], localtime()[4]) + '\n\n' +
+                            '-' * 25 + '\n' +
+                            'User: ' + user + '\n')
+                    self.write_to_file('log.txt', text)
+
                     if follow:
                         try:
+                            self.write_to_file('log.txt', 'Followed\n')
+
                             follow_btn = self.driver.find_element_by_class_name(
                                 'bY2yH').find_element_by_tag_name('button')
                             if follow_btn.get_attribute('innerText') == 'Follow' and uniform(0, 1) > 0.5:
@@ -77,10 +88,14 @@ class Jarvis:
                         like_btn.click()
                     sleep(choice(range(2, 4)))
 
-                    if comments_on:
+                    if comments_on and uniform(0, 1) > 0.5:
+                        comment = choice(comments)
+                        self.write_to_file(
+                            'log.txt', ('Comment: ' + comment + '\n' + '-' * 25 + '\n\n'))
+
                         self.driver.find_element_by_class_name('Ypffh').click()
-                        self.driver.find_element_by_class_name('Ypffh').send_keys(
-                            choice(comments))
+                        self.driver.find_element_by_class_name(
+                            'Ypffh').send_keys(comment)
                         sleep(choice(range(2, 4)))
 
                         self.driver.find_element_by_xpath(
@@ -96,8 +111,10 @@ class Jarvis:
 
                 posts -= 1
         except:
-            print('houston, we have a problem')
+            return('houston, we have a problem')
 
+        self.write_to_file('log.txt', 'End Run: %d:%d' %
+                           (localtime()[3], localtime()[4]) + '\n\n' + '*' * 40 + '\n\n')
         return self
 
     # likes posts from users the provided account is following
@@ -145,7 +162,7 @@ class Jarvis:
                     posts -= 1
 
         except:
-            print('jarvis is not feeling lovely')
+            return('jarvis is not feeling lovely')
 
         return self
 
@@ -192,7 +209,7 @@ class Jarvis:
                     sleep(choice(range(3, 6)))
 
         except:
-            print('jarvis is being greedy')
+            return('jarvis is being greedy')
 
     # writes
     def write_to_file(self, file_name, text):
@@ -202,7 +219,9 @@ class Jarvis:
             file.close()
 
         except:
-            print('no ink in this pen')
+            return('no ink in this pen')
+
+        return file
 
     # reads from specified file
     def read_from_file(self, read_file):
@@ -213,10 +232,12 @@ class Jarvis:
             file.close()
 
         except:
-            print('forgot my reading glasses')
+            return('forgot my reading glasses')
+
+        return file
 
 
 jarvis = Jarvis(user_name, user_password)
-# jarvis.login().explore([], [], 20, False)
+jarvis.login().explore(hashtags, comments, 30, False)
 # jarvis.login().show_love()
-jarvis.login().share('Levelin up 20', ['memes', 'funny'], 10)
+# jarvis.login().share('Levelin up 20', ['memes', 'funny'], 10)
