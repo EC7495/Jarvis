@@ -17,6 +17,10 @@ Jarvis has various ways of interacting with your account:
 
 Jarvis can also be easily reprogrammed to perform other tasks on your account.
 
+## Demo:
+
+!["Demo of Jarvis"](public/jarvis.gif)
+
 ## Set up:
 
 To use Jarvis, you will need to fork and or clone this repo, and install the following tools:
@@ -52,7 +56,7 @@ A Jarvis instance will have the following properties:
   Selenium Webdriver instance that will be used for DOM interaction.
   <br/>
   <br/>
-  Return value: `self`
+  <strong>Return value:</strong> `self`
 
 ### Syntax
 
@@ -72,7 +76,7 @@ Post conditions:
 - Logs in to the account provided. Execution terminates once home page is reached.
   <br/>
   <br/>
-  Return value: `self`
+  <strong>Return value:</strong> `self`
 
 ### Syntax
 
@@ -101,10 +105,10 @@ Post conditions:
   As Jarvis goes through each post, he will collect the username of the person who made the post and save it in a file called `log.txt`. Jarvis will also make a note if a comment was made and if the user was followed.<br/>
   <br/>
   `log.txt` example:<br/>
-  ![](public/log.png)
+  !["log.txt example"](public/log.png)
   <br/>
   <br/>
-  Return value: `self`
+  <strong>Return value:</strong> `self`
 
 ### Syntax
 
@@ -131,7 +135,7 @@ Post conditions:
   The rest will be skipped as Jarvis scrolls past them. If a user is provided, Jarvis will navigate to their profile and go through the specified amount of posts, liking all unliked posts he comes across.
   <br/>
   <br/>
-  Return value: `self`
+  <strong>Return value:</strong> `self`
 
 ### Syntax
 
@@ -154,7 +158,7 @@ Post conditions:
   This method can be used as a web scraper or as a means of keeping track of the users Jarvis follows and the comments he leaves. Most of the time, you will use this method in conjuction with the `explore` method to create some sort of `log.txt` file.
   <br/>
   <br/>
-  Return value: `file_name`
+  <strong>Return value:</strong> `file_name`
 
 ### Syntax
 
