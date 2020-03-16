@@ -59,23 +59,22 @@ class Jarvis:
             self.driver.find_element_by_class_name('_9AhH0').click()
             sleep(choice(range(2, 4)))
 
-            user = self.driver.find_element_by_class_name(
-                'e1e1d').get_attribute('innerText')
-            text = ('Date: %d/%d/%d' % (localtime()
-                                        [1], localtime()[2], localtime()[0]) + '\n' +
-                    'Start Run: %d:%d' % (localtime()[3], localtime()[4]) + '\n\n' +
-                    '-' * 25 + '\n' +
-                    'User: ' + user + '\n')
-            file = self.write_to_file('log.txt', text)
+            self.write_to_file('log.txt', ('Date: %d/%d/%d' % (localtime()[1], localtime()[2], localtime()[0]) + '\n' +
+                                           'Start Run: %d:%d' % (localtime()[3], localtime()[4]) + '\n\n'))
 
             while(posts):
                 try:
+                    user = self.driver.find_element_by_class_name(
+                        'e1e1d').get_attribute('innerText')
+                    self.write_to_file('log.txt', '-' * 25 +
+                                       '\nUser: ' + user + '\n')
+
                     if follow:
                         try:
                             follow_btn = self.driver.find_element_by_class_name(
                                 'bY2yH').find_element_by_tag_name('button')
                             if follow_btn.get_attribute('innerText') == 'Follow' and uniform(0, 1) > 0.4:
-                                self.write_to_file(file, 'Followed\n')
+                                self.write_to_file('log.txt', 'Followed\n')
                                 follow_btn.click()
                             sleep(choice(range(2, 4)))
 
@@ -90,7 +89,7 @@ class Jarvis:
                     if comments_on and uniform(0, 1) > 0.25:
                         comment = choice(comments)
                         self.write_to_file(
-                            file, ('Comment: ' + comment + '\n' + '-' * 25 + '\n\n'))
+                            'log.txt', 'Comment: ' + comment + '\n')
 
                         self.driver.find_element_by_class_name('Ypffh').click()
                         self.driver.find_element_by_class_name(
@@ -108,11 +107,13 @@ class Jarvis:
                     self.driver.find_element_by_link_text('Next').click()
                     sleep(choice(range(2, 4)))
 
+                self.write_to_file('log.txt', '-' * 25 + '\n\n')
+
                 posts -= 1
         except:
             return('houston, we have a problem')
 
-        self.write_to_file(file, 'End Run: %d:%d' %
+        self.write_to_file('log.txt', 'End Run: %d:%d' %
                            (localtime()[3], localtime()[4]) + '\n\n' + '*' * 40 + '\n\n')
         self.driver.find_elements_by_class_name('wpO6b')[-1].click()
 
@@ -239,6 +240,6 @@ class Jarvis:
 
 
 jarvis = Jarvis(user_name, user_password)
-jarvis.login().explore(hashtags, comments, 10, True)
+jarvis.login().explore(hashtags, comments, 15, True)
 # jarvis.login().show_love()
 # jarvis.login().share('Levelin up 20', ['memes', 'funny'], 10)
