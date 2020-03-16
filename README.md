@@ -3,7 +3,7 @@
 ## Overview:
 
 Jarvis is a friendly bot that likes users' ig posts and leaves friendly comments on them.<br/>
-He was created in Python3 using the Selenium Webdriver API.
+He was created using Python3 and the Selenium Webdriver API.
 
 Jarvis has various ways of interacting with your account:
 
@@ -87,11 +87,44 @@ Pre conditions:
 - `posts` (Optional - Default value: `20`)<br/>
   An integer denoting how many posts Jarvis should go through.
 - `follow` (Optional - Default value: `False`)<br/>
-  A boolean (or any other truthy/falsy value) denoting whether Jarvis should follow users as he likes and comments on their post or not.
+  A boolean (or any other truthy or falsy value) denoting whether Jarvis should follow users as he likes and comments on their post or not.
 
 Post conditions:
 
-- Jarvis will go through the specified amount of posts, from either the explore page or hashtags page, liking and leaving a randomly selected comment on each one. There is approximately a 50% chance that Jarvis will follow the user of a particular post (can be adjusted in the `explore` method's logic) if `follow` is set to `True`.
+- Jarvis will go through the specified amount of posts, from either the explore page or hashtags page and like every single post. Jarvis will leave a randomly selected comment on approximately 75% of those posts, if comments are provided. There is also approximately a 60% chance that Jarvis will follow the user of that particular post if `follow` is set to `True`.<br/>
+  As Jarvis goes through each post, he will collect the username of the person who made the post and save it in a file called `log.txt`. Jarvis will also make a note if a comment was made and if the user was followed.<br/>
+  Example format of `log.txt`:<br/>
+  `
+  Date: 3/15/2020
+  Start Run: 21:00
+
+---
+
+User: user1
+Comment: i hope you have a wonderful day today
+
+---
+
+---
+
+User: user2
+Followed
+
+---
+
+---
+
+User: user3
+Followed
+Comment: who wants to be friends?
+
+---
+
+End Run: 21:02
+
+---
+
+`
 
 ### Syntax
 

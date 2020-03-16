@@ -159,7 +159,7 @@ class Jarvis:
                             pass
 
                     self.driver.execute_script(
-                        'window.scrollTo(0, document.body.scrollHeight / 1.8);')
+                        'window.scrollTo(0, document.body.scrollHeight / 1.5);')
 
                     posts -= 1
 
@@ -237,9 +237,3 @@ class Jarvis:
             return('forgot my reading glasses')
 
         return file
-
-
-jarvis = Jarvis(user_name, user_password)
-jarvis.login().explore(hashtags, comments, 15, True)
-# jarvis.login().show_love()
-# jarvis.login().share('Levelin up 20', ['memes', 'funny'], 10)
