@@ -1,7 +1,5 @@
 from time import sleep, localtime
-from secrets import user_name, user_password
 from selenium import webdriver
-from random_strings import hashtags, comments
 from urls import login_url, tags_url, explore_page_url, user_url
 from random import choice, uniform
 
