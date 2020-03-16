@@ -51,6 +51,7 @@ A Jarvis instance will have the following properties:
 - `self.driver`<br/>
   Selenium Webdriver instance that will be used for DOM interaction.
   <br/>
+  <br/>
   Return value: `self`
 
 ### Syntax
@@ -69,6 +70,7 @@ Pre conditions:
 Post conditions:
 
 - Logs in to the account provided. Execution terminates once home page is reached.
+  <br/>
   <br/>
   Return value: `self`
 
@@ -101,6 +103,7 @@ Post conditions:
   `log.txt` example:<br/>
   ![](public/log.png)
   <br/>
+  <br/>
   Return value: `self`
 
 ### Syntax
@@ -127,6 +130,7 @@ Post conditions:
 - Jarvis will go through the specified amount of posts in your feed, liking approximately 60% of them.
   The rest will be skipped as Jarvis scrolls past them. If a user is provided, Jarvis will navigate to their profile and go through the specified amount of posts, liking all unliked posts he comes across.
   <br/>
+  <br/>
   Return value: `self`
 
 ### Syntax
@@ -149,6 +153,7 @@ Post conditions:
   <br/>
   This method can be used as a web scraper or as a means of keeping track of the users Jarvis follows and the comments he leaves. Most of the time, you will use this method in conjuction with the `explore` method to create some sort of `log.txt` file.
   <br/>
+  <br/>
   Return value: `file_name`
 
 ### Syntax
@@ -170,7 +175,8 @@ Post conditions:
   <br/>
   This method can be used as a tool to retrieve information from `log.txt` or any other file.
   <br/>
-  Return value: `file_name`
+  <br/>
+  <strong>Return value:</strong> `file_name`
 
 ### Syntax
 
