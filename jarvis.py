@@ -2,6 +2,9 @@ from time import sleep, localtime
 from selenium import webdriver
 from urls import login_url, tags_url, explore_page_url, user_url
 from random import choice, uniform
+# the following two imports are not included in repo
+from random_strings import hashtags, comments
+from secrets import user_name, user_password
 
 
 class Jarvis:
@@ -224,9 +227,9 @@ class Jarvis:
         return file
 
     # reads from specified file
-    def read_from_file(self, read_file):
+    def read_from_file(self, file_name):
         try:
-            file = open(read_file, 'r')
+            file = open(file_name, 'r')
             for line in file:
                 print(line)
             file.close()

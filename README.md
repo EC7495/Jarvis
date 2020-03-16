@@ -50,6 +50,8 @@ A Jarvis instance will have the following properties:
 
 - `self.driver`<br/>
   Selenium Webdriver instance that will be used for DOM interaction.
+  <br/>
+  Return value: `self`
 
 ### Syntax
 
@@ -67,6 +69,8 @@ Pre conditions:
 Post conditions:
 
 - Logs in to the account provided. Execution terminates once home page is reached.
+  <br/>
+  Return value: `self`
 
 ### Syntax
 
@@ -96,6 +100,8 @@ Post conditions:
   <br/>
   `log.txt` example:<br/>
   ![](public/log.png)
+  <br/>
+  Return value: `self`
 
 ### Syntax
 
@@ -120,6 +126,8 @@ Post conditions:
 
 - Jarvis will go through the specified amount of posts in your feed, liking approximately 60% of them.
   The rest will be skipped as Jarvis scrolls past them. If a user is provided, Jarvis will navigate to their profile and go through the specified amount of posts, liking all unliked posts he comes across.
+  <br/>
+  Return value: `self`
 
 ### Syntax
 
@@ -128,4 +136,44 @@ Post conditions:
 
 ---
 
-### `write_to_file(self, posts: int, user: str)`
+### `write_to_file(self, file_name: str, text: str)`
+
+Pre conditions:
+
+- A file name was provided in valid format.
+- The text provided is a string, or any other data type that can be written to a file.
+
+Post conditions:
+
+- Jarvis will open the file provided in "append" mode and append the text provided. If the file provided exists, Jarvis will open and append to that same file. Otherwise, Jarvis will create a new file with the name provided.<br/>
+  <br/>
+  This method can be used as a web scraper or as a means of keeping track of the users Jarvis follows and the comments he leaves. Most of the time, you will use this method in conjuction with the `explore` method to create some sort of `log.txt` file.
+  <br/>
+  Return value: `file_name`
+
+### Syntax
+
+`jarvis_instance.write_to_file("log.txt", "Jarvis will append this text.")`
+
+---
+
+### `read_from_file(self, file_name: str)`
+
+Pre conditions:
+
+- A file name was provided in valid format.
+- The file provided already exists.
+
+Post conditions:
+
+- Jarvis will open the file provided in "read" mode and print its contents on the shell.<br/>
+  <br/>
+  This method can be used as a tool to retrieve information from `log.txt` or any other file.
+  <br/>
+  Return value: `file_name`
+
+### Syntax
+
+`jarvis_instance.read_from_file("log.txt")`
+
+---
