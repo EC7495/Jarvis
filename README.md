@@ -127,3 +127,5 @@ Post conditions:
 `jarvis_instance.show_love(50, 'your_bff_user_name')`
 
 ---
+
+### `write_to_file(self, posts: int, user: str)`
