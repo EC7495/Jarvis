@@ -19,7 +19,7 @@ Jarvis can also be easily reprogrammed to perform other tasks on your account.
 
 ## Demo:
 
-!["Demo of Jarvis"](public/jarvis.gif)
+![Jarvis demo](public/jarvis.gif)
 
 ## Set up:
 
@@ -105,7 +105,7 @@ Post conditions:
   As Jarvis goes through each post, he will collect the username of the person who made the post and save it in a file called `log.txt`. Jarvis will also make a note if a comment was made and if the user was followed.<br/>
   <br/>
   `log.txt` example:<br/>
-  !["log.txt example"](public/log.png)
+  ![log.txt example](public/log.png)
   <br/>
   <br/>
   <strong>Return value:</strong> `self`
@@ -144,7 +144,33 @@ Post conditions:
 
 ---
 
+### `share(self, recipient: str, tags: list, posts: int)`
+
+Pre conditions:
+
+- Jarvis has successfully logged in to the provided account.
+- `recipient`<br/>
+  A string that denotes which user Jarvis should share posts with.
+- `tags` (Optional - Default value: `[]`)<br/>
+  A list of strings representing possible hashtags Jarvis can visit. If empty, Jarvis will navigate to explore page
+- `posts` (Optional - Default value: `20`)<br/>
+  An integer denoting how many posts Jarvis should go through.
+
+Post conditions:
+
+- Jarvis will go through the specified amount of posts, from either the explore page or hashtags page and share approximately 40% of the posts he comes across.
+
+### Syntax
+
+`jarvis_instance.share('my_bff', ['memes', 'funny'], 10)`
+
+---
+
 ### `write_to_file(self, file_name: str, text: str)`
+
+Post conditions:
+
+- Jarvis will open the file provided in "append" mode and append the text provided. If the file provided exists, Jarvis will open and append to that same file. Otherwise, Jarvis will create a new file with the name provided.<br/>
 
 Pre conditions:
 
