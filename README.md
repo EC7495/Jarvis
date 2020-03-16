@@ -94,37 +94,7 @@ Post conditions:
 - Jarvis will go through the specified amount of posts, from either the explore page or hashtags page and like every single post. Jarvis will leave a randomly selected comment on approximately 75% of those posts, if comments are provided. There is also approximately a 60% chance that Jarvis will follow the user of that particular post if `follow` is set to `True`.<br/>
   As Jarvis goes through each post, he will collect the username of the person who made the post and save it in a file called `log.txt`. Jarvis will also make a note if a comment was made and if the user was followed.<br/>
   Example format of `log.txt`:<br/>
-  `
-  Date: 3/15/2020
-  Start Run: 21:00
-
----
-
-User: user1
-Comment: i hope you have a wonderful day today
-
----
-
----
-
-User: user2
-Followed
-
----
-
----
-
-User: user3
-Followed
-Comment: who wants to be friends?
-
----
-
-End Run: 21:02
-
----
-
-`
+  ![](public/log.png)
 
 ### Syntax
 
