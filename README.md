@@ -33,7 +33,7 @@ To use Jarvis, you will need to fork and or clone this repo, and install the fol
   http://chromedriver.chromium.org/<br/>
   This will allow automated navigation capabilities in the Google Chrome web browser.
 
-Remember to change the executable path for `self.driver` in the Jarvis `__init__` method to be the path of your own ChromeDrive executable file.
+Remember to change the executable path for `self.driver` in the Jarvis `__init__` method to be the path of your own ChromeDriver executable file.
 
 ## Jarvis API:
 
