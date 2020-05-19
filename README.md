@@ -33,7 +33,7 @@ To use Jarvis, you will need to fork and or clone this repo, and install the fol
   http://chromedriver.chromium.org/<br/>
   This will allow automated navigation capabilities in the Google Chrome web browser.
 
-Remember to change the executable path for `self.driver` in the Jarvis `__init__` method to be the path of your own ChromeDrive executable file.
+Remember to change the executable path for `self.driver` in the Jarvis `__init__` method to be the path of your own ChromeDriver executable file.
 
 ## Jarvis API:
 
@@ -101,8 +101,9 @@ Pre conditions:
 
 Post conditions:
 
-- Jarvis will go through the specified amount of posts, from either the explore page or hashtags page and like every single post. Jarvis will leave a randomly selected comment on approximately 75% of those posts, if comments are provided. There is also approximately a 60% chance that Jarvis will follow the user of that particular post if `follow` is set to `True`.<br/>
-  As Jarvis goes through each post, he will collect the username of the person who made the post and save it in a file called `log.txt`. Jarvis will also make a note if a comment was made and if the user was followed.<br/>
+- Jarvis will go through the specified amount of posts, from either the explore page or hashtags page and like every single post. 
+- Jarvis will leave a randomly selected comment on approximately 75% of those posts, if comments are provided. There is also approximately a 60% chance that Jarvis will follow the user of that particular post if `follow` is set to `True`.
+- As Jarvis goes through each post, he will collect the username of the person who made the post and save it in a file called `log.txt`. Jarvis will also make a note if a comment was made and if the user was followed.<br/>
   <br/>
   `log.txt` example:<br/>
   ![log.txt example](public/log.png)
