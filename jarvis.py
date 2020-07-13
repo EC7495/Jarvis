@@ -57,37 +57,40 @@ class Jarvis:
             self.driver.find_element_by_class_name('_9AhH0').click()
             sleep(choice(range(2, 4)))
 
-            self.write_to_file('log.txt', ('Date: %d/%d/%d' % (localtime()[1], localtime()[2], localtime()[0]) + '\n' +
-                                           'Start Run: %d:%d' % (localtime()[3], localtime()[4]) + '\n\n'))
+            # self.write_to_file('log.txt', ('Date: %d/%d/%d' % (localtime()[1], localtime()[2], localtime()[0]) + '\n' +
+            #                                'Start Run: %d:%d' % (localtime()[3], localtime()[4]) + '\n\n'))
 
             while(posts):
                 try:
-                    user = self.driver.find_element_by_class_name(
-                        'e1e1d').get_attribute('innerText')
-                    self.write_to_file('log.txt', '-' * 25 +
-                                       '\nUser: ' + user + '\n')
+                    # user = self.driver.find_element_by_class_name(
+                    #     'e1e1d').get_attribute('innerText')
+                    # self.write_to_file('log.txt', '-' * 25 +
+                    #                    '\nUser: ' + user + '\n')
 
                     if follow:
                         try:
                             follow_btn = self.driver.find_element_by_class_name(
                                 'bY2yH').find_element_by_tag_name('button')
                             if follow_btn.get_attribute('innerText') == 'Follow' and uniform(0, 1) > 0.4:
-                                self.write_to_file('log.txt', 'Followed\n')
+                                # self.write_to_file('log.txt', 'Followed\n')
                                 follow_btn.click()
                             sleep(choice(range(2, 4)))
 
                         except:
                             pass
 
-                    like_btn = self.driver.find_element_by_class_name('wpO6b')
+                    # like_btn = self.driver.find_element_by_class_name('wpO6b')
+                    like_btn = self.driver.find_element_by_xpath(
+                        '/html/body/div[4]/div[2]/div/article/div[3]/section[1]/span[1]/button')
                     if like_btn.find_element_by_tag_name('svg').get_attribute('aria-label') == 'Like':
                         like_btn.click()
+
                     sleep(choice(range(2, 4)))
 
                     if comments_on and uniform(0, 1) > 0.25:
                         comment = choice(comments)
-                        self.write_to_file(
-                            'log.txt', 'Comment: ' + comment + '\n')
+                        # self.write_to_file(
+                        #     'log.txt', 'Comment: ' + comment + '\n')
 
                         self.driver.find_element_by_class_name('Ypffh').click()
                         self.driver.find_element_by_class_name(
@@ -105,14 +108,14 @@ class Jarvis:
                     self.driver.find_element_by_link_text('Next').click()
                     sleep(choice(range(2, 4)))
 
-                self.write_to_file('log.txt', '-' * 25 + '\n\n')
+                # self.write_to_file('log.txt', '-' * 25 + '\n\n')
 
                 posts -= 1
         except:
             return('houston, we have a problem')
 
-        self.write_to_file('log.txt', 'End Run: %d:%d' %
-                           (localtime()[3], localtime()[4]) + '\n\n' + '*' * 40 + '\n\n')
+        # self.write_to_file('log.txt', 'End Run: %d:%d' %
+        #                    (localtime()[3], localtime()[4]) + '\n\n' + '*' * 40 + '\n\n')
         self.driver.find_elements_by_class_name('wpO6b')[-1].click()
 
         return self
