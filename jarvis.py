@@ -79,9 +79,9 @@ class Jarvis:
                         except:
                             pass
 
-                    # like_btn = self.driver.find_element_by_class_name('wpO6b')
-                    like_btn = self.driver.find_element_by_xpath(
-                        '/html/body/div[4]/div[2]/div/article/div[3]/section[1]/span[1]/button')
+                    like_btn = self.driver.find_elements_by_class_name(
+                        'ltpMr')[0].find_element_by_class_name('wpO6b')
+
                     if like_btn.find_element_by_tag_name('svg').get_attribute('aria-label') == 'Like':
                         like_btn.click()
 
